@@ -1,5 +1,27 @@
 
-class Setup: pass
+class TestManager:
+
+  def __init__(self):
+    self.decorators = []
+
+  def resolve_test_cases(self):
+    test_cases = []
+    for i, decorator in enumerate(self.decorators):
+      if isinstance(decorator, expect):
+        for j in range(i - 1, -1, -1):
+          if isinstance(self.decorators[j], setup):
+            decorator.setups.insert(0, self.decorators[j])
+        test_cases.append(decorator)
+
+class TestCase:
+
+  def __init__(self):
+    self.
+
+class Decorator: pass
+
+
+class Setup(Decorator): pass
 class Assertion: pass
 class ToBe(Assertion):
   def __init__(self, *args):
@@ -24,7 +46,7 @@ class init(Setup):
 
 
 
-class expect:
+class expect(Decorator):
 
   def __init__(self, *args, **kwargs):
     self.args = args
